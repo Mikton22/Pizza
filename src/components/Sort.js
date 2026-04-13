@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from "react";
 
 export const sortList = [
-  { name: "популярности", sortProperty: "rating" },
-  { name: "цене", sortProperty: "price" },
-  { name: "алфавиту", sortProperty: "title" },
+  { name: "популярности (↓)", sortProperty: "-rating" },
+  { name: "популярности (↑)", sortProperty: "rating" },
+
+  { name: "цене (↓)", sortProperty: "-price" },
+  { name: "цене (↑)", sortProperty: "price" },
+
+  { name: "алфавиту (↓)", sortProperty: "-title" },
+  { name: "алфавиту (↑)", sortProperty: "title" },
 ];
 
 function Sort({ value, onChangeSort }) {
@@ -15,19 +19,19 @@ function Sort({ value, onChangeSort }) {
     setOpen(false);
   };
 
-  const sortRef = React.useRef()
+  const sortRef = React.useRef();
 
   React.useEffect(() => {
-  const handleClick = (event) => {
-    if (sortRef.current && sortRef.current.contains(event.target)) {
-      setOpen(true);
-    } else {
-      setOpen(false);
-    }
-  };
-  document.body.addEventListener('click', handleClick);
-  return () => document.body.removeEventListener('click', handleClick);
-}, []);
+    const handleClick = (event) => {
+      if (sortRef.current && sortRef.current.contains(event.target)) {
+        setOpen(true);
+      } else {
+        setOpen(false);
+      }
+    };
+    document.body.addEventListener("click", handleClick);
+    return () => document.body.removeEventListener("click", handleClick);
+  }, []);
 
   return (
     <div ref={sortRef} className="sort">
@@ -42,7 +46,9 @@ function Sort({ value, onChangeSort }) {
               <li
                 key={index}
                 onClick={() => onClickListItem(obj)}
-                className={value.sortProperty === obj.sortProperty ? 'active' : ''}
+                className={
+                  value.sortProperty === obj.sortProperty ? "active" : ""
+                }
               >
                 {obj.name}
               </li>

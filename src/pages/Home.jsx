@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import qs from "qs";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -28,9 +28,6 @@ const Home = () => {
     useSelector(selectFilter);
   const { items, status } = useSelector(selectPizzasData);
 
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const [selectedSort, setSelectedSort] = useState(0);
-
   const onClickCategory = (id) => {
     dispatch(setCategoryId(id));
   };
@@ -46,7 +43,8 @@ const Home = () => {
   const getPizzas = async () => {
     const category = categoryId > 0 ? `category=${categoryId}` : ``;
     const search = searchValue ? `search=${searchValue}` : ``;
-    const sortBy = selectedSort.sortProperty;
+    const sortBy = selectedSort.sortProperty.replace('-', '');
+    const order = selectedSort.sortProperty.includes('-') ? 'desc' : 'asc';
     /* fetch(
       `https://68149373225ff1af16294cea.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortList[selectedSort].sortType}&order=desc&${search}`,
     )
@@ -65,8 +63,9 @@ const Home = () => {
         category,
         search,
         sortBy,
+        order,
         currentPage,
-      })
+      }),
     );
   };
   useEffect(() => {
