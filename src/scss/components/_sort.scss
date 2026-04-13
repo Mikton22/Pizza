@@ -1,0 +1,64 @@
+@import "../variables";
+
+.sort {
+  position: relative;
+  overflow: visible;
+  &__label {
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    box-sizing: border-box;
+
+    svg {
+      margin-right: 8px;
+    }
+
+    b {
+      margin-right: 8px;
+    }
+
+    span {
+      color: $orange;
+      border-bottom: 1px dashed $orange;
+      cursor: pointer;
+    }
+  }
+
+  &__popup {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    min-width: 200px;
+    width: max-content;
+    max-width: 320px;
+    box-sizing: border-box;
+    padding: 8px 8px 8px 0px;
+    background: gray;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+
+    ul {
+      overflow: hidden;
+      list-style: none;
+
+      li {
+        padding: 12px 20px;
+        cursor: pointer;
+
+        &.active,
+        &:hover {
+          background: rgba(254, 95, 30, 0.05);
+        }
+
+        &.active {
+          font-weight: bold;
+          color: $orange;
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
