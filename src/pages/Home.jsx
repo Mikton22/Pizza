@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import qs from "qs";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -17,7 +17,6 @@ import {
   selectFilter,
 } from "../redux/slices/filterSlice";
 import { fetchPizzas, selectPizzasData } from "../redux/slices/pizzasSlice";
-// import pizzas from './assets/pizzas.json';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -43,8 +42,8 @@ const Home = () => {
   const getPizzas = async () => {
     const category = categoryId > 0 ? `category=${categoryId}` : ``;
     const search = searchValue ? `search=${searchValue}` : ``;
-    const sortBy = selectedSort.sortProperty.replace('-', '');
-    const order = selectedSort.sortProperty.includes('-') ? 'desc' : 'asc';
+    const sortBy = selectedSort.sortProperty.replace("-", "");
+    const order = selectedSort.sortProperty.includes("-") ? "desc" : "asc";
     /* fetch(
       `https://68149373225ff1af16294cea.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortList[selectedSort].sortType}&order=desc&${search}`,
     )
@@ -97,10 +96,11 @@ const Home = () => {
   }, [categoryId, selectedSort, searchValue, currentPage]);
 
   const pizzas = items.map((pizza) => (
-    // <Link></Link>
-    <div key={pizza.id} to={`/pizza/${pizza.id}`}>
-      <PizzaBlock {...pizza} />
-    </div>
+    <Link key={pizza.id} to={`/pizza/${pizza.id}`}>
+      <div>
+        <PizzaBlock {...pizza} />
+      </div>
+    </Link>
   ));
 
   const skeletons = [...new Array(6)].map((_, index) => (

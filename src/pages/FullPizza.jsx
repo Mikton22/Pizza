@@ -10,14 +10,14 @@ const FullPizza = () => {
     async function fetchPizza() {
       try {
         const { data } = await axios.get(
-          `https://68f676c56b852b1d6f16d028.mockapi.io/items?id=${id}`
+          `https://68f676c56b852b1d6f16d028.mockapi.io/items?id=${id}`,
         );
         setPizza(data[0]);
       } catch (error) {
         alert("Ошибка загрузки");
       }
     }
-    fetchPizza()
+    fetchPizza();
   }, [id]);
 
   if (!pizza) {
@@ -27,9 +27,9 @@ const FullPizza = () => {
   return (
     <div className="container">
       <h2>{pizza.title}</h2>
-      <p>
-        {pizza.price} Руб.
-      </p>
+      <img src={pizza.imageUrl} alt={pizza.title} style={{ width: "300px" }} />
+      <p style={{ fontSize: "22px" }}>{pizza.id === 1 && "ENJOY CHEESE"}</p>
+      <p>{pizza.price} Руб.</p>
     </div>
   );
 };

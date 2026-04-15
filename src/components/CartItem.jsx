@@ -1,12 +1,13 @@
 import { useDispatch } from 'react-redux';
 import logo from '../assets/img/pizza-logo.svg';
-import { removeItem, addItem, clearItem } from '../redux/slices/cartSlice';
+import { removeItem, addItem } from '../redux/slices/cartSlice';
 
-export const CartItem = ({ id, title, count, price, type, size }) => {
+export const CartItem = ({ id, title, count, price, type, size, key }) => {
   const dispatch = useDispatch();
   
-  const onClickRemoveItem = (id, title, price, count, type, size) => {
+  const onClickRemoveItem = (id, title, price, count, type, size, key) => {
     const item = {
+      key,
       id,
       title,
       price,
@@ -20,6 +21,7 @@ export const CartItem = ({ id, title, count, price, type, size }) => {
 
   const onClickMinus = () => {
     const item = {
+      key,
       id,
       title,
       price: price/count--,
@@ -32,7 +34,8 @@ export const CartItem = ({ id, title, count, price, type, size }) => {
   }
 
   const onClickPlus = () => {
-    const item = {
+    const item = { 
+      key,
       id,
       title,
       price: price/count++,
@@ -103,7 +106,7 @@ export const CartItem = ({ id, title, count, price, type, size }) => {
       </div>
       <div className='cart__item-remove'>
         <div
-          onClick={()=>onClickRemoveItem(id, title, price, count, type, size)}
+          onClick={()=>onClickRemoveItem(id, title, price, count, type, size, key)}
           className='button button--outline button--circle'
         >
           <svg
